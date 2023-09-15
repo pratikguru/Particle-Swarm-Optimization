@@ -22,6 +22,8 @@ where `n` is the dimensionality of the problem, and `xi` represents individual c
  - Finally, the optimization results are plotted, and the plot is saved with a timestamp in the filename.
 
 
+![Alt text](./Figure_1.png?raw=true "PSO Function Optimization Output.")
+
 ## Table of Contents
 
 - [Overview](#overview)
