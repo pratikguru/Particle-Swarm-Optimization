@@ -24,6 +24,8 @@ where `n` is the dimensionality of the problem, and `xi` represents individual c
 
 ![Alt text](./Figure_1.png?raw=true "PSO Function Optimization Output.")
 
+![Alt text](./SimulationPlayback.gif?raw=true)
+
 ## Table of Contents
 
 - [Overview](#overview)

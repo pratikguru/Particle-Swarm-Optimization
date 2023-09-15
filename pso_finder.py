@@ -10,20 +10,24 @@ c1: float = 0.8  # Personal best weight
 c2: float = 0.9  # Global best weight
 
 n_iterations: int = 100  # Maximum number of iterations
-n_particles: int = 50     # Number of particles in the swarm
-target_error: float = 1e-6  # Target error for stopping criteria
+n_particles: int = 200   # Number of particles in the swarm
+target_error: float = 1e-7  # Target error for stopping criteria
 
 fig = plt.figure(figsize=(10, 5))
 ax = fig.add_subplot(121)
-
 ax2 = fig.add_subplot(122, projection='3d')
+
+plt.ylim(-800, 800)
+plt.xlim(-800, 800)
+
+
 class Particle:
     """Class representing a particle in the swarm."""
 
     def __init__(self) -> None:
         """Initialize a particle with random position and velocity."""
-        x = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 1000
-        y = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 1000
+        x = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 500
+        y = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 500
         self.position: np.ndarray[float] = np.array([x, y])
         self.pBest_position: np.ndarray[float] = self.position
         self.pBest_value: float = float('inf')
@@ -100,11 +104,8 @@ class Space:
         print('BestPosition in this time:', self.gBest_position)
         print('BestValue in this time:', self.gBest_value)
 
-        plt.title("Best Position")
-        plt.ylim(-800, 800)
-        plt.xlim(-800, 800)
-        
-  
+        ax.set_title(f"Iteration: {iteration}")
+    
         for particle in self.particles:
 
             ax.plot(self.gBest_position[0], self.gBest_position[1], 'bo')
@@ -115,8 +116,6 @@ class Space:
 
 def create_particle() -> Particle:
     """Create a new particle with random initial position."""
-    x = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 1000
-    y = (-1) ** bool(rd.getrandbits(1)) * rd.random() * 1000
     return Particle()
 
 def mapOptimalSolution(px,py):
@@ -126,21 +125,21 @@ def mapOptimalSolution(px,py):
         return x**2 + y**2 + 1
 
     # Create a grid of x and y values
-    x = np.linspace(-500, 500, 100)
-    y = np.linspace(-500, 500, 100)
+    x = np.linspace(-500, 500, 10)
+    y = np.linspace(-500, 500, 10)
     X, Y = np.meshgrid(x, y)
     # Calculate the corresponding z values using the function
     Z = f(X, Y)
 
     ax2.clear()
+    ax2.set_title("Function to be Optimized")
     ax2.plot_surface(X, Y, Z, cmap='viridis')
 
     # Label the axes
     ax2.set_xlabel('X')
     ax2.set_ylabel('Y')
     ax2.set_zlabel('f(X, Y)')
-    plt.xlim(-800, 800)
-    plt.ylim(-800, 800)
+
 
     # Mark a point at (x_point, y_point, z_point)
     x_point = px
@@ -149,8 +148,7 @@ def mapOptimalSolution(px,py):
     ax2.plot_surface(X, Y, Z, cmap='viridis')
     ax2.scatter([x_point], [y_point], [0], color='blue', s=100, label='Point (2, 3, f(2, 3))')
     # Set the title
-    plt.title('Surface Plot of f(X, Y) = X^2 + Y^2 + 1')
-
+    
     # Show the plot
     plt.show(block=False)
     plt.pause(0.00000000001)
@@ -177,7 +175,7 @@ def main() -> None:
         mapOptimalSolution(search_space.gBest_position[0], search_space.gBest_position[1])
         iteration += 1
     
-    plt.pause(1000000000)
+    plt.pause(50)
     plt.tight_layout()
     print("The best solution is:", search_space.gBest_position, "in", iteration, "iterations")
 
