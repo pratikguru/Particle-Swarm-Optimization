@@ -98,6 +98,7 @@ def Optimization():
                             self.gbest_cost = self.pbest_cost[i]
 
                 self.bestCost[it] = self.gbest_cost
+            return self
                 
 
         # Plot the optimization results
@@ -107,19 +108,20 @@ def Optimization():
             plt.ylabel("Best Function Value")
             plt.title("PSO with Sphere Function")
             print("Optimal Fitness Value: ", self.gbest_cost)
-            plt.plot(self.gbest_cost, '-o')
+            
             # Save the plot with a timestamp in the filename
             #current_time = datetime.datetime.now().time()
             #plt.savefig(f"./output/output-{current_time}.png")
             
             plt.show()
+
+            return self 
            
-            
 
     # Create a Particle object and perform PSO optimization
     p = Particle()
-    p.Evaluate()
-    p.Plot()
+    p.Evaluate().Plot()
+    
 
 # Entry point of the program
 if __name__ == "__main__":
