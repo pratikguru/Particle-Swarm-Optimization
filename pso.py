@@ -24,7 +24,7 @@ d = 10  # Dimensionality of the problem
 xMin, xMax = -100, 100  # Search space boundaries
 vMin, vMax = -0.2 * (xMax - xMin), 0.2 * (xMax - xMin)  # Velocity boundaries
 MaxIt = 3000  # Maximum number of iterations
-ps = 10  # Number of particles
+ps = 20  # Number of particles
 c1 = 2  # Cognitive coefficient
 c2 = 2  # Social coefficient
 w = 0.9 - ((0.9 - 0.4) / MaxIt) * np.linspace(0, MaxIt, MaxIt)  # Inertia weight
@@ -98,6 +98,7 @@ def Optimization():
                             self.gbest_cost = self.pbest_cost[i]
 
                 self.bestCost[it] = self.gbest_cost
+                
 
         # Plot the optimization results
         def Plot(self):
@@ -107,11 +108,13 @@ def Optimization():
             plt.title("PSO with Sphere Function")
             print("Optimal Fitness Value: ", self.gbest_cost)
             plt.plot(self.gbest_cost, '-o')
-
             # Save the plot with a timestamp in the filename
-            current_time = datetime.datetime.now().time()
-            plt.savefig(f"./output/output-{current_time}.png")
+            #current_time = datetime.datetime.now().time()
+            #plt.savefig(f"./output/output-{current_time}.png")
+            
             plt.show()
+           
+            
 
     # Create a Particle object and perform PSO optimization
     p = Particle()
