@@ -13,6 +13,15 @@ The Sphere function is defined as follows:
 
 where `n` is the dimensionality of the problem, and `xi` represents individual components of the solution vector `x`. The goal is to minimize this function and find the optimal solution where `f(x)` equals zero.
 
+ - This code implements a basic Particle Swarm Optimization (PSO) algorithm to optimize the Sphere function.
+ - It defines a Particle class to represent particles in the PSO algorithm.
+ - Particles are initialized with random positions and velocities within specified bounds.
+ - The PSO algorithm is executed over a specified number of iterations (MaxIt).
+ - At each iteration, particles update their velocities and positions based on the PSO formula.
+ - The best personal and global positions are updated, and the best fitness value is stored.
+ - Finally, the optimization results are plotted, and the plot is saved with a timestamp in the filename.
+
+
 ## Table of Contents
 
 - [Overview](#overview)
